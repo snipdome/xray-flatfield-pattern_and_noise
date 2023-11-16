@@ -11,24 +11,6 @@ Author: Domenico Iuso
 Date: 16 Nov 2023
 '''
 
-def project_point(x, y, z, a, b, c):
-    """
-    Projects the points with coordinates x, y, z onto the plane
-    defined by a*x + b*y + c*z = 1
-    """ 
-    assert False
-    vector_norm = a*a + b*b + c*c
-    normal_vector = np.array([a, b, c]) / np.sqrt(vector_norm)
-    point_in_plane = np.array([a, b, c]) / vector_norm
-
-    points = np.column_stack((x, y, z))
-    points_from_point_in_plane = points - point_in_plane
-    proj_onto_normal_vector = np.dot(points_from_point_in_plane,
-                                     normal_vector)
-    proj_onto_plane = (points_from_point_in_plane - proj_onto_normal_vector[:, None]*normal_vector)
-
-    return point_in_plane + proj_onto_plane
-
 def project_point(src_pos, det_pos, n):
     d = -(n * det_pos).sum(dim=1)
     D = (n * src_pos).sum(dim=1) + d
